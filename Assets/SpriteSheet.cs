@@ -33,8 +33,8 @@ public class SpriteSheet : MonoBehaviour
             // v coordinate is the bottom of the image in opengl so we need to invert.
             Vector2 offset = new Vector2(uIndex * _size.x, 1.0f - _size.y - vIndex * _size.y);
 
-            _myRenderer.material.SetTextureOffset("_CubeColorMap", offset);
-            _myRenderer.material.SetTextureScale("_CubeColorMap", _size);
+            _myRenderer.material.SetTextureOffset("_CubeAlphaMap", offset);
+            _myRenderer.material.SetTextureScale("_CubeAlphaMap", _size);
 
             _lastIndex = index;
         }

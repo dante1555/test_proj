@@ -29,6 +29,7 @@
 	struct Input
 	{
 		float2 uv_CubeAlphaMap;
+		float2 uv_CubeColorMap;
 	};
 
 	void surf(Input IN, inout SurfaceOutput o)
@@ -37,15 +38,10 @@
 		fixed xscroll1 = scrolledUV1.x;
 
 
-		_ColorfromMap = tex2D(_CubeColorMap, IN.uv_CubeAlphaMap);
+		_ColorfromMap = tex2D(_CubeColorMap, IN.uv_CubeColorMap);
 		_AlphaPow = tex2D(_CubeAlphaMap, IN.uv_CubeAlphaMap).a;
 
-		if (scrolledUV1.y < 0.3)
-			o.Emission = _ColorfromMap * _OutCubeFaceColorPw; //внешние грани
-		else if (scrolledUV1.y > 0.3 && scrolledUV1.y < 0.7)
-			o.Emission = _ColorfromMap * _InCubeFaceColorPw; // внутренние грани
-		else if (scrolledUV1.y > 0.7)
-			o.Emission = _MainColorCube * (_AlphaPow + _CubePower1) * _MainColorCubePw; // основна грань
+			o.Emission = _ColorfromMap * (0.2 + _AlphaPow); //внешние грани
 
 	}
 	ENDCG
